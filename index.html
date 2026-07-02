@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProLedge &ndash; CMA &amp; FMAA Training. Launching Soon.</title>
+  <meta name="description" content="ProLedge — practical CMA® and FMAA™ preparation built by finance practitioners. Learn What Matters. Launching soon." />
+  <meta name="theme-color" content="#081120" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* ProLedge brand — deep navy & sky blue (from the logo) */
+      --bg-dark: #081120;
+      --bg-deep: #04080f;
+      --bg-card: #0d1a30;
+      --navy-900: #0a1124;   /* logo background navy */
+      --blue-600: #4a90e2;   /* logo "Ledge" blue — primary accent */
+      --blue-500: #3674c4;
+      --blue-400: #6faaf5;
+      --blue-300: #a8ccff;
+      --text-white: #f2f6fc;
+      --text-muted: #b8c6dc;
+      --text-faint: #8195b3;
+      --text-dim: #5f7091;
+      --ink: #0d1a30;        /* navy ink on light sections */
+      --ink-soft: #3d5170;
+      --paper: #ffffff;
+      --paper-soft: #f2f6fb;
+      --border-blue: rgba(111,170,245,0.18);
+      --border-ink: rgba(13,38,76,0.14);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-white);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    .serif { font-family: 'Playfair Display', serif; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 32px;
+      transition: background var(--transition), box-shadow var(--transition), backdrop-filter var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(6,13,26,0.9);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 30px rgba(2,6,14,0.55);
+      border-bottom: 1px solid rgba(111,170,245,0.12);
+    }
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      height: 86px;
+    }
+    .logo { display: flex; flex-direction: column; line-height: 1; }
+    .logo-text {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #fbfcfd;
+    }
+    .logo-text span { color: var(--blue-400); }
+    .logo-tag {
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-top: 5px;
+    }
+    .nav-links { display: flex; gap: 32px; margin-left: auto; margin-right: 8px; }
+    .nav-links a {
+      font-size: 13.5px; font-weight: 600; color: var(--text-muted);
+      letter-spacing: 0.2px; position: relative; padding: 6px 0;
+      transition: color var(--transition);
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; right: 100%; bottom: 0;
+      height: 2px; background: var(--blue-400);
+      transition: right var(--transition);
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { right: 0; }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      border: 1px solid rgba(111,170,245,0.45);
+      background: rgba(74,144,226,0.14);
+      border-radius: 100px;
+      padding: 10px 22px;
+      backdrop-filter: blur(6px);
+      transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+    }
+    .nav-cta:hover { background: var(--blue-600); border-color: var(--blue-600); transform: translateY(-2px); }
+
+    /* ── HERO (CFA-style: full-bleed real photo, left-aligned statement) ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 24px 90px;
+      overflow: hidden;
+      perspective: 1400px;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: -6%;
+      z-index: 0;
+      transform: scale(1.08);
+      will-change: transform;
+      transition: transform 0.4s ease-out;
+    }
+    /* cross-fading slideshow of real photography with slow Ken-Burns zoom */
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      will-change: opacity, transform;
+      animation: heroKen 30s ease-in-out infinite;
+      filter: saturate(0.85) contrast(1.1) brightness(0.85);
+    }
+    @keyframes heroKen {
+      0%   { opacity: 0; transform: scale(1.05); }
+      5%   { opacity: 1; }
+      33%  { opacity: 1; }
+      40%  { opacity: 0; transform: scale(1.15); }
+      100% { opacity: 0; transform: scale(1.15); }
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(100deg, rgba(5,10,22,0.92) 0%, rgba(6,13,28,0.72) 45%, rgba(6,13,28,0.35) 100%),
+        linear-gradient(180deg, rgba(5,10,22,0.35) 0%, transparent 30%, rgba(4,8,15,0.9) 100%);
+    }
+    .hero-grain {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background-image: radial-gradient(rgba(168,204,255,0.05) 1px, transparent 1px);
+      background-size: 4px 4px;
+      opacity: 0.5;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+    }
+    .hero-copy { max-width: 640px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(74,144,226,0.14);
+      border: 1px solid rgba(111,170,245,0.4);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blue-300);
+      margin-bottom: 28px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-badge .dot { width: 7px; height: 7px; background: var(--blue-400); border-radius: 50%; animation: blink 1.8s ease infinite; }
+    @keyframes blink { 0%,100%{opacity:1; box-shadow:0 0 0 0 rgba(111,170,245,0.6)} 50%{opacity:0.4; box-shadow:0 0 0 6px rgba(111,170,245,0)} }
+
+    .hero h1 {
+      font-size: clamp(42px, 6.5vw, 78px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(120deg, #6faaf5 0%, #cfe3ff 45%, #4a90e2 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* "Learn What ___" rotating word (the brand motion) */
+    .rot-wrap {
+      position: relative; display: inline-block;
+      height: 1.08em; overflow: hidden; vertical-align: bottom;
+      padding-right: 0.08em;      /* room for wide glyphs */
+    }
+    .rot-spacer { visibility: hidden; }
+    .rot {
+      position: absolute; left: 0; top: 0;
+      display: flex; flex-direction: column;
+      animation: rotWords 9s cubic-bezier(0.8,0,0.2,1) infinite;
+    }
+    .rot span { display: block; height: 1.08em; line-height: 1.08; white-space: nowrap; }
+    @keyframes rotWords {
+      0%, 18%  { transform: translateY(0); }
+      25%, 43% { transform: translateY(-1.08em); }
+      50%, 68% { transform: translateY(-2.16em); }
+      75%, 93% { transform: translateY(-3.24em); }
+      100%     { transform: translateY(0); }
+    }
+    .hero-sub {
+      max-width: 540px;
+      margin: 24px 0 0;
+      font-size: clamp(15px, 2vw, 18px);
+      line-height: 1.75;
+      color: var(--text-muted);
+      animation: fadeUp 0.9s ease 0.2s both;
+    }
+    .hero-sub strong { color: #fff; font-weight: 600; }
+    .hero-ctas {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      margin-top: 36px;
+      animation: fadeUp 0.9s ease 0.3s both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #5b9cf0 0%, #3674c4 100%);
+      color: #fff;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.3px;
+      padding: 15px 32px; border-radius: 100px;
+      box-shadow: 0 10px 28px rgba(54,116,196,0.45);
+      transition: filter var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover { filter: brightness(1.12); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(74,144,226,0.5); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: #fff; font-size: 14px; font-weight: 700;
+      padding: 15px 32px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .btn-ghost:hover { background: rgba(111,170,245,0.16); border-color: var(--blue-400); transform: translateY(-2px); }
+
+    /* hero credential chips */
+    .hero-creds {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-top: 44px;
+      animation: fadeUp 0.9s ease 0.4s both;
+    }
+    .cred-chip {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 18px;
+      background: rgba(10,20,40,0.55);
+      border: 1px solid var(--border-blue);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+    .cred-chip b { font-size: 14px; color: #fff; letter-spacing: 0.4px; }
+    .cred-chip span { font-size: 11.5px; color: var(--text-faint); }
+
+    /* ── SCROLL PROMPT ── */
+    .scroll-prompt {
+      position: absolute;
+      bottom: 28px; left: 0; right: 0;
+      margin-inline: auto;
+      width: max-content;
+      z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--text-faint);
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      animation: fadeUp 1s ease 0.6s both;
+    }
+    .scroll-mouse {
+      width: 24px; height: 38px;
+      border: 2px solid rgba(168,204,255,0.4);
+      border-radius: 14px;
+      display: flex; justify-content: center;
+      padding-top: 6px;
+    }
+    .scroll-mouse span {
+      width: 4px; height: 8px; border-radius: 2px;
+      background: var(--blue-400);
+      animation: scrollDot 1.6s ease infinite;
+    }
+    @keyframes scrollDot { 0%{opacity:0;transform:translateY(-4px)} 50%{opacity:1;transform:translateY(4px)} 100%{opacity:0;transform:translateY(10px)} }
+
+    @keyframes fadeUp { from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:translateY(0)} }
+
+    /* ── SECTION HEADINGS ── */
+    .sec-label { text-align: center; color: var(--blue-600); font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
+    .sec-heading { text-align: center; font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .sec-sub { text-align: center; font-size: 15.5px; color: var(--text-muted); max-width: 580px; margin: 0 auto 60px; line-height: 1.75; }
+    .light .sec-heading { color: var(--ink); }
+    .light .sec-sub { color: var(--ink-soft); }
+
+    /* ── PROGRAMS (CFA-style tiles on white) ── */
+    .programs {
+      background: var(--paper);
+      padding: 110px 24px 120px;
+    }
+    .programs-inner { max-width: 1140px; margin: 0 auto; }
+    .programs .sec-label { color: var(--blue-500); }
+    .prog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .prog-card {
+      display: flex; flex-direction: column;
+      background: #fff;
+      border: 1px solid var(--border-ink);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 10px 34px rgba(13,38,76,0.08);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .prog-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(74,144,226,0.45);
+      box-shadow: 0 30px 60px rgba(13,38,76,0.18);
+    }
+    .prog-img {
+      position: relative;
+      height: 210px;
+      background-size: cover;
+      background-position: center;
+    }
+    .prog-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,23,48,0.25) 0%, rgba(10,23,48,0.55) 100%);
+    }
+    .prog-tag {
+      position: absolute; top: 16px; left: 16px; z-index: 2;
+      font-size: 10px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase;
+      padding: 7px 14px; border-radius: 100px;
+      color: #fff; background: rgba(10,23,48,0.65);
+      border: 1px solid rgba(168,204,255,0.4);
+      backdrop-filter: blur(6px);
+    }
+    .prog-abbr {
+      position: absolute; left: 22px; bottom: 16px; z-index: 2;
+      font-size: clamp(34px, 4vw, 46px); font-weight: 900; letter-spacing: -0.01em; color: #fff;
+      text-shadow: 0 4px 24px rgba(4,8,15,0.6);
+    }
+    .prog-abbr sup { font-size: 0.38em; font-weight: 700; vertical-align: super; }
+    .prog-body { display: flex; flex-direction: column; flex: 1; padding: 26px 28px 28px; }
+    .prog-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+    .prog-org { margin-top: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--blue-500); }
+    .prog-desc { margin-top: 14px; font-size: 14px; line-height: 1.7; color: var(--ink-soft); }
+    .prog-list { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .prog-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 13px; line-height: 1.6; color: var(--ink-soft);
+    }
+    .prog-list li::before {
+      content: '';
+      flex: 0 0 18px; height: 18px; margin-top: 1px;
+      background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a90e2' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+    }
+    .prog-list li b { color: var(--ink); font-weight: 700; }
+    .prog-cta {
+      margin-top: 24px;
+      display: inline-flex; align-items: center; gap: 8px;
+      align-self: flex-start;
+      font-size: 13.5px; font-weight: 700; color: var(--blue-500);
+      padding-bottom: 3px;
+      border-bottom: 2px solid rgba(74,144,226,0.35);
+      transition: color var(--transition), border-color var(--transition), gap var(--transition);
+    }
+    .prog-cta:hover { color: var(--blue-600); border-color: var(--blue-600); gap: 12px; }
+
+    /* ── WHY PROLEDGE (Coursera-style feature grid on soft paper) ── */
+    .why {
+      background: var(--paper-soft);
+      border-top: 1px solid var(--border-ink);
+      padding: 110px 24px 120px;
+    }
+    .why-inner { max-width: 1140px; margin: 0 auto; }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; perspective: 1100px; }
+    .why-card {
+      background: #fff;
+      border: 1px solid var(--border-ink);
+      border-radius: var(--radius-md);
+      padding: 30px 24px;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease, box-shadow var(--transition), border-color var(--transition);
+    }
+    .why-card:hover { box-shadow: 0 24px 48px rgba(13,38,76,0.14); border-color: rgba(74,144,226,0.4); }
+    .why-card .wi {
+      width: 48px; height: 48px; margin-bottom: 18px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(74,144,226,0.14), rgba(111,170,245,0.22));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue-500);
+    }
+    .why-card .wi svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .why-card h4 { font-size: 15.5px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .why-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* ── STORY (Who We Are) ── */
+    .story {
+      position: relative;
+      padding: 120px 24px;
+      background: linear-gradient(180deg, var(--bg-dark) 0%, #0a1528 55%, var(--bg-dark) 100%);
+      overflow: hidden;
+    }
+    .story::before {
+      content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+      width: 860px; height: 860px;
+      background: radial-gradient(circle, rgba(74,144,226,0.14), transparent 62%);
+      pointer-events: none;
+    }
+    .story-inner { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; text-align: center; }
+    .story-icon {
+      width: 58px; height: 58px; margin: 0 auto 24px;
+      border-radius: 16px;
+      background: rgba(74,144,226,0.12);
+      border: 1px solid rgba(111,170,245,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue-400);
+      box-shadow: 0 12px 30px rgba(74,144,226,0.18), inset 0 1px 0 rgba(168,204,255,0.15);
+    }
+    .story-icon svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .story .sec-label { color: var(--blue-400); }
+    .story-text {
+      font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: clamp(15px, 1.9vw, 19px);
+      line-height: 1.75;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0.1px;
+      color: var(--text-muted);
+      margin-top: 26px;
+    }
+    .story-text strong { color: #ffffff; font-weight: 700; font-style: italic; }
+    .story-text em { font-style: normal; font-weight: 600; color: var(--blue-400); }
+    .story-rule {
+      width: 64px; height: 3px; border-radius: 2px;
+      margin: 38px auto 0;
+      background: linear-gradient(90deg, var(--blue-600), var(--blue-300));
+    }
+    .story-pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 18px; margin-top: 48px; text-align: left;
+    }
+    .pillar {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 20px 22px;
+      background: rgba(74,144,226,0.06);
+      border: 1px solid var(--border-blue);
+      border-radius: var(--radius-md);
+      transition: transform var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .pillar:hover {
+      transform: translateY(-5px);
+      background: rgba(74,144,226,0.11);
+      border-color: rgba(111,170,245,0.4);
+      box-shadow: 0 20px 44px rgba(2,6,14,0.5);
+    }
+    .pillar .pi {
+      flex: 0 0 40px; width: 40px; height: 40px; border-radius: 11px;
+      background: rgba(74,144,226,0.16);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue-300);
+    }
+    .pillar .pi svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar h4 { font-size: 14px; font-weight: 700; color: var(--text-white); margin-bottom: 5px; }
+    .pillar p { font-size: 12.5px; color: var(--text-faint); line-height: 1.65; }
+
+    /* ── SIGNUP (notify) ── */
+    .signup {
+      position: relative;
+      min-height: 90vh;
+      display: flex; align-items: center;
+      padding: 120px 24px 100px;
+      overflow: hidden;
+    }
+    .signup-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: url('assets/images/hero-1.jpg') center / cover no-repeat;
+      filter: saturate(0.8) contrast(1.08) brightness(0.7);
+    }
+    .signup-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(4,8,15,0.9) 0%, rgba(6,13,28,0.72) 45%, rgba(4,8,15,0.94) 100%),
+        radial-gradient(circle at 50% 30%, rgba(74,144,226,0.16), transparent 60%);
+    }
+    .signup-inner {
+      position: relative; z-index: 2;
+      max-width: 720px; width: 100%;
+      margin: 0 auto; text-align: center;
+    }
+    .signup h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    .signup h2 .grad {
+      background: linear-gradient(120deg, #6faaf5 0%, #cfe3ff 45%, #4a90e2 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .signup-quote {
+      margin-top: 14px;
+      font-size: 15px; color: var(--text-faint);
+      font-family: 'Playfair Display', serif; font-style: italic;
+    }
+
+    .notify {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 560px;
+      margin: 40px auto 0;
+      padding: 24px;
+      background: rgba(10,20,40,0.6);
+      border: 1px solid rgba(111,170,245,0.22);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 60px rgba(2,6,14,0.5), inset 0 1px 0 rgba(168,204,255,0.1);
+    }
+    .field-row { display: flex; gap: 12px; }
+    .phone-group { flex: 1; display: flex; gap: 8px; min-width: 0; }
+    .phone-group #notifyCode { flex: 0 0 116px; }
+    .phone-group #notifyMobile { flex: 1; min-width: 0; }
+    .notify input, .notify select {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+      background: rgba(168,204,255,0.07);
+      border: 1px solid rgba(111,170,245,0.25);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text-white);
+      outline: none;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .notify input::placeholder { color: rgba(184,198,220,0.55); }
+    .notify select { color: rgba(184,198,220,0.55); cursor: pointer; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236faaf5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+    .notify select:valid { color: var(--text-white); }
+    .notify select option { background: #0d1a30; color: #fff; }
+    .notify input:focus, .notify select:focus { border-color: var(--blue-400); background: rgba(111,170,245,0.12); }
+    .btn-notify {
+      width: 100%;
+      margin-top: 2px;
+      background: linear-gradient(135deg, #5b9cf0 0%, #3674c4 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 15px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+      box-shadow: 0 8px 24px rgba(54,116,196,0.4);
+    }
+    .btn-notify:hover { filter: brightness(1.12); transform: translateY(-2px); box-shadow: 0 12px 34px rgba(74,144,226,0.45); }
+    .notify-msg {
+      max-width: 480px; margin: 14px auto 0;
+      font-size: 13px; color: var(--blue-400);
+      min-height: 18px; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .notify-msg.show { opacity: 1; }
+
+    /* ── FOOTER ── */
+    footer { background: #060b1e; padding: 60px 24px 30px; border-top: 1px solid rgba(111,170,245,0.14); }   /* exact match to the logo's navy background */
+    .footer-inner { max-width: 1140px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
+    .footer-logo-img { height: 72px; width: auto; border-radius: 12px; }
+    .footer-tag { font-size: 13px; color: var(--text-faint); max-width: 460px; line-height: 1.7; }
+    .footer-address {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-style: normal; text-align: left;
+      font-size: 12.5px; line-height: 1.65; color: var(--text-faint);
+      max-width: 440px;
+    }
+    .footer-address svg {
+      flex: 0 0 18px; width: 18px; height: 18px; margin-top: 1px;
+      stroke: var(--blue-400); fill: none; stroke-width: 1.7;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .socials { display: flex; gap: 12px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid #1e3050; background: transparent; color: var(--text-faint);
+      display: flex; align-items: center; justify-content: center;
+      transition: color var(--transition), border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+    .social-btn:hover { color: #fff; border-color: var(--blue-500); background: rgba(74,144,226,0.16); transform: translateY(-3px); }
+    .social-btn svg { width: 16px; height: 16px; fill: currentColor; }
+    .footer-note { font-size: 11px; color: var(--text-dim); max-width: 560px; line-height: 1.7; }
+    .footer-bottom { margin-top: 10px; font-size: 12px; color: var(--text-dim); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .prog-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .story-pillars { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      nav { padding: 0 18px; }
+      .logo-text { font-size: 22px; }
+      .logo-tag { font-size: 8.5px; letter-spacing: 2px; }
+      .field-row { flex-direction: column; }
+      .why-grid { grid-template-columns: 1fr; }
+      .hero-ctas .btn-primary, .hero-ctas .btn-ghost { width: 100%; justify-content: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ── INTERACTIVE POINTER FX ── */
+    #fx {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9000;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Interactive pointer / touch FX -->
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <!-- NAVBAR -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="logo" aria-label="ProLedge home">
+        <span class="logo-text">Pro<span>Ledge</span></span>
+        <span class="logo-tag">Learn What Matters</span>
+      </a>
+      <div class="nav-links">
+        <a href="#programs">Programs</a>
+        <a href="#why">Why ProLedge</a>
+        <a href="#about">About</a>
+      </div>
+      <a href="#notify" class="nav-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Reserve Your Spot
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="hero-bg" id="heroBg">
+      <div class="hero-slide" style="background-image:url('assets/images/hero-3.jpg'); animation-delay:0s"></div>
+      <div class="hero-slide" style="background-image:url('assets/images/hero-1.jpg'); animation-delay:10s"></div>
+      <div class="hero-slide" style="background-image:url('assets/images/hero-2.jpg'); animation-delay:20s"></div>
+    </div>
+    <div class="hero-grain"></div>
+
+    <div class="hero-inner" id="heroInner">
+      <div class="hero-copy">
+        <div class="hero-badge"><span class="dot"></span> Reserve Your Spot</div>
+        <h1>Learn What<br>
+          <span class="rot-wrap">
+            <span class="rot-spacer">Moves You.</span>
+            <span class="rot" aria-hidden="true">
+              <span class="grad">Matters.</span>
+              <span class="grad">Moves You.</span>
+              <span class="grad">Lasts.</span>
+              <span class="grad">Counts.</span>
+            </span>
+          </span>
+          <span class="sr-only">Matters.</span>
+        </h1>
+        <p class="hero-sub">
+          Go beyond exams with <strong>CMA&reg;</strong> and <strong>FMAA&trade;</strong> training led by
+          real finance professionals.
+        </p>
+        <div class="hero-ctas">
+          <a href="#notify" class="btn-primary">Reserve Your Spot</a>
+          <a href="#programs" class="btn-ghost">Explore Programs</a>
+        </div>
+        <div class="hero-creds">
+          <div class="cred-chip"><b>CMA&reg;</b><span>Certified Management Accountant</span></div>
+          <div class="cred-chip"><b>FMAA&trade;</b><span>Financial &amp; Managerial Accounting Associate</span></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-prompt" aria-label="Scroll to about">
+      <div class="scroll-mouse"><span></span></div>
+      Scroll
+    </a>
+  </header>
+
+  <!-- STORY (Who We Are — second screen, CFA-style mission statement) -->
+  <section class="story" id="about">
+    <div class="story-inner">
+      <div class="story-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <p class="sec-label">Who We Are</p>
+      <h2 class="sec-heading">Built by Professionals,<br>for Future Professionals</h2>
+      <p class="story-text">
+        ProLedge was founded by <strong>CMA-qualified professionals</strong> who noticed a simple truth:
+        what&rsquo;s taught in finance classrooms and what the industry actually values often don&rsquo;t match.
+        So we built something different - a platform that doesn&rsquo;t chase trends or noise, but focuses
+        on <em>what genuinely matters</em>: practical skills, real judgment, and steady career growth.
+        No shortcuts, no hype - just the kind of learning that quietly shapes a strong finance professional.
+      </p>
+      <div class="story-rule" aria-hidden="true"></div>
+      <div class="story-pillars">
+        <div class="pillar">
+          <div class="pi" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a5 5 0 0 0-6.6 6.6L3 18v3h3l5.1-5.1a5 5 0 0 0 6.6-6.6L14 12l-2-2z"/></svg>
+          </div>
+          <div>
+            <h4>Practical Expertise</h4>
+            <p>Skills drawn from real industry experience &mdash; not just textbooks.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pi" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+          </div>
+          <div>
+            <h4>A Strong Professional Path</h4>
+            <p>Clear direction for finance students and working professionals.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pi" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L21 9.27l-4.5 4.38L17.8 20 12 16.77 6.2 20l1.3-6.35L3 9.27l6.1-1.01z"/></svg>
+          </div>
+          <div>
+            <h4>Skills That Set You Apart</h4>
+            <p>The quiet edge that distinguishes careers over the long run.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="programs light" id="programs">
+    <div class="programs-inner">
+      <p class="sec-label">Our Programs</p>
+      <h2 class="sec-heading">Two Credentials. One Clear Path.</h2>
+      <p class="sec-sub">
+        Focused preparation for the certifications that move finance and accounting careers
+        forward &mdash; whether you&rsquo;re starting out or stepping up.
+      </p>
+
+      <div class="prog-grid">
+        <!-- CMA -->
+        <article class="prog-card">
+          <div class="prog-img" style="background-image:url('assets/images/hero-3.jpg')">
+            <span class="prog-tag">Flagship Program</span>
+            <span class="prog-abbr">CMA<sup>&reg;</sup></span>
+          </div>
+          <div class="prog-body">
+            <p class="prog-name">Certified Management Accountant</p>
+            <p class="prog-org">Globally Recognized &middot; IMA&reg;</p>
+            <p class="prog-desc">
+              The gold standard for management accounting and strategic financial leadership.
+              Our program turns the syllabus into working knowledge you can use on the job from day one.
+            </p>
+            <ul class="prog-list">
+              <li><b>Part 1&nbsp;&mdash;</b>&nbsp;Financial Planning, Performance &amp; Analytics</li>
+              <li><b>Part 2&nbsp;&mdash;</b>&nbsp;Strategic Financial Management</li>
+              <li>Exam-focused practice with real business cases</li>
+              <li>For future finance leaders, controllers &amp; analysts</li>
+            </ul>
+            <a href="#notify" class="prog-cta">Book Your Slot <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+
+        <!-- FMAA -->
+        <article class="prog-card">
+          <div class="prog-img" style="background-image:url('assets/images/hero-2.jpg')">
+            <span class="prog-tag">Start Here</span>
+            <span class="prog-abbr">FMAA<sup>&trade;</sup></span>
+          </div>
+          <div class="prog-body">
+            <p class="prog-name">Financial &amp; Managerial Accounting Associate</p>
+            <p class="prog-org">Foundation Credential &middot; IMA&reg;</p>
+            <p class="prog-desc">
+              The smart first step for students and early-career professionals &mdash; prove your
+              command of accounting and finance fundamentals with a single, focused exam.
+            </p>
+            <ul class="prog-list">
+              <li>One exam covering financial &amp; managerial accounting essentials</li>
+              <li>Ideal for students and first-role professionals</li>
+              <li>Builds the base &mdash; and the confidence &mdash; for the CMA&reg;</li>
+              <li>Practical examples drawn from real workplaces</li>
+            </ul>
+            <a href="#notify" class="prog-cta">Book Your Slot <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY PROLEDGE -->
+  <section class="why light" id="why">
+    <div class="why-inner">
+      <p class="sec-label">Why ProLedge</p>
+      <h2 class="sec-heading">Backed by Career Reality</h2>
+      <p class="sec-sub">
+        We build leaders, not just certificate holders.
+      </p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="wi" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <h4>Practitioner-Led Teaching</h4>
+          <p>Learn from CMA-qualified professionals who use these skills in industry every day &mdash; not from slide readers.</p>
+        </div>
+        <div class="why-card">
+          <div class="wi" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <h4>Exam-Focused Preparation</h4>
+          <p>Structured study plans, practice questions and reviews aimed squarely at what the exam actually tests.</p>
+        </div>
+        <div class="why-card">
+          <div class="wi" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a5 5 0 0 0-6.6 6.6L3 18v3h3l5.1-5.1a5 5 0 0 0 6.6-6.6L14 12l-2-2z"/></svg>
+          </div>
+          <h4>Real-World Application</h4>
+          <p>Cases and workplace scenarios that turn theory into practical expertise employers can see.</p>
+        </div>
+        <div class="why-card">
+          <div class="wi" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+          </div>
+          <h4>Career Direction</h4>
+          <p>Guidance on shaping a strong professional path &mdash; the quiet skills that set individuals apart.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section class="signup" id="signup">
+    <div class="signup-bg" aria-hidden="true"></div>
+    <div class="signup-inner">
+      <h2>The Best Investment<br><span class="grad">Is in Yourself.</span></h2>
+      <p class="signup-quote">&mdash; Warren Buffett</p>
+
+      <form class="notify" id="notify" novalidate>
+        <div class="field-row">
+          <input type="text" id="notifyName" placeholder="Full name" aria-label="Full name" autocomplete="name" required />
+          <input type="email" id="notifyEmail" placeholder="Email address" aria-label="Email address" autocomplete="email" required />
+        </div>
+        <div class="field-row">
+          <div class="phone-group">
+            <select id="notifyCode" aria-label="Country code" required>
+              <option value="+971">+971 UAE</option>
+              <option value="+966">+966 KSA</option>
+              <option value="+974">+974 Qatar</option>
+              <option value="+973">+973 Bahrain</option>
+              <option value="+965">+965 Kuwait</option>
+              <option value="+968">+968 Oman</option>
+              <option value="+20">+20 Egypt</option>
+              <option value="+962">+962 Jordan</option>
+              <option value="+961">+961 Lebanon</option>
+              <option value="+91" selected>+91 India</option>
+              <option value="+92">+92 Pakistan</option>
+              <option value="+880">+880 Bangladesh</option>
+              <option value="+63">+63 Philippines</option>
+              <option value="+44">+44 UK</option>
+              <option value="+1">+1 USA/Canada</option>
+              <option value="+49">+49 Germany</option>
+              <option value="+33">+33 France</option>
+              <option value="+90">+90 Turkey</option>
+              <option value="+234">+234 Nigeria</option>
+              <option value="+27">+27 South Africa</option>
+            </select>
+            <input type="tel" id="notifyMobile" placeholder="Mobile number" aria-label="Mobile number" autocomplete="tel" required />
+          </div>
+        </div>
+        <div class="field-row">
+          <select id="notifyEdu" aria-label="Education level" required>
+            <option value="" disabled selected>Education level</option>
+            <option>High School</option>
+            <option>Diploma</option>
+            <option>Bachelor&rsquo;s Degree</option>
+            <option>Master&rsquo;s Degree</option>
+            <option>Professional Certification</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-notify">Reserve Your Spot</button>
+      </form>
+      <p class="notify-msg" id="notifyMsg">🎉 Thanks! We&rsquo;ll let you know the moment we launch.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <img src="assets/images/proledge_converted.svg" alt="ProLedge" class="footer-logo-img" decoding="async" loading="lazy" />
+      <p class="footer-tag">Learn What Matters. &mdash; Practical CMA&reg; &amp; FMAA&trade; preparation, built by CMA-qualified professionals.</p>
+      <address class="footer-address">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>
+          Door No: 4/461, 2nd Floor, Valamkottil Towers,<br>
+          Judgemukku, Thrikkakara PO, Kakkanad,<br>
+          Ernakulam, Kerala &ndash; 682021
+        </span>
+      </address>
+      <div class="socials">
+        <a class="social-btn" href="https://www.linkedin.com/in/proledge-in-70924041b" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0zM7.5 8H12v2.2h.07c.63-1.2 2.17-2.46 4.46-2.46C21.4 7.74 24 10 24 14.6V24h-5v-8.2c0-1.96-.04-4.48-2.73-4.48-2.73 0-3.15 2.13-3.15 4.34V24h-5z"/></svg></a>
+        <a class="social-btn" href="https://www.instagram.com/proledge.in" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.36 2.67.95 3.34.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.47 1.38 2.13.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.13-1.38 5.86 5.86 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.41-10.41a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg></a>
+        <a class="social-btn" href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 1.5h3.4l-7.4 8.5L24 22.5h-6.8l-5.3-7-6.1 7H2.4l8-9.1L0 1.5h6.9l4.8 6.4zm-1.2 19h1.9L6.3 3.4H4.3z"/></svg></a>
+      </div>
+      <p class="footer-note">
+        CMA&reg; (Certified Management Accountant) and FMAA&trade; (Financial and Managerial Accounting Associate)
+        are certifications of IMA&reg; (Institute of Management Accountants). ProLedge is an independent
+        education provider and is not affiliated with or endorsed by IMA&reg;.
+      </p>
+      <p class="footer-bottom">&copy; <span id="year"></span> ProLedge. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    // ── Notify form → Google Sheet ──
+    // Paste your Google Apps Script Web App URL here (ends with /exec).
+    // Until set, emails still save locally as a fallback.
+    const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxBqfpj-eJFd1WN5Ynx3PwG3rbot-9Lk3RJ5p7j6gqWcG1uVHWRuVONzh9HxrjTCJpvRg/exec';
+
+    const form = document.getElementById('notify');
+    const nameInput = document.getElementById('notifyName');
+    const email = document.getElementById('notifyEmail');
+    const mobile = document.getElementById('notifyMobile');
+    const code = document.getElementById('notifyCode');
+    const edu = document.getElementById('notifyEdu');
+    const msg = document.getElementById('notifyMsg');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    function showMsg(text, color) {
+      msg.textContent = text;
+      msg.style.color = color;
+      msg.classList.add('show');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      const val = email.value.trim();
+      const phone = mobile.value.trim();
+      const dialCode = code.value;
+      const education = edu.value;
+
+      if (!name) { showMsg('⚠️ Please enter your full name.', '#f87171'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { showMsg('⚠️ Please enter a valid email address.', '#f87171'); return; }
+      if (phone.replace(/\D/g, '').length < 7) { showMsg('⚠️ Please enter a valid mobile number.', '#f87171'); return; }
+      if (!education) { showMsg('⚠️ Please select your education level.', '#f87171'); return; }
+
+      // Local fallback copy (also avoids double-sending the same email)
+      try {
+        const list = JSON.parse(localStorage.getItem('proledge_waitlist') || '[]');
+        if (!list.some(r => (typeof r === 'string' ? r : r.email) === val)) {
+          list.push({ name, email: val, countryCode: dialCode, mobile: phone, education });
+          localStorage.setItem('proledge_waitlist', JSON.stringify(list));
+        }
+      } catch (_) {}
+
+      submitBtn.disabled = true;
+      const originalLabel = submitBtn.textContent;
+      submitBtn.textContent = 'Adding…';
+
+      try {
+        if (SHEET_ENDPOINT && SHEET_ENDPOINT.startsWith('http')) {
+          // "no-cors" + text/plain avoids a CORS preflight; the row is still written.
+          await fetch(SHEET_ENDPOINT, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              name: name,
+              email: val,
+              countryCode: dialCode,
+              mobile: phone,
+              education: education,
+              source: 'launch-page',
+              page: location.href,
+              userAgent: navigator.userAgent,
+              ts: new Date().toISOString()
+            })
+          });
+        }
+        showMsg('🎉 Thanks! We’ll let you know the moment we launch.', 'var(--blue-400)');
+        form.reset();
+      } catch (err) {
+        showMsg('🎉 Thanks! You’re on the list.', 'var(--blue-400)');
+        form.reset();
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
+    });
+
+    // ── 3D parallax (mouse + touch) ──
+    const heroBg = document.getElementById('heroBg');
+    const heroInner = document.getElementById('heroInner');
+    const heroEl = document.getElementById('hero');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduceMotion) {
+      let rx = 0, ry = 0, tx = 0, ty = 0;
+      const setTarget = (cx, cy) => { tx = cx / innerWidth - 0.5; ty = cy / innerHeight - 0.5; };
+      heroEl.addEventListener('mousemove', (e) => setTarget(e.clientX, e.clientY));
+      heroEl.addEventListener('touchmove', (e) => { const t = e.touches[0]; if (t) setTarget(t.clientX, t.clientY); }, { passive: true });
+
+      (function render() {
+        rx += (tx - rx) * 0.06;
+        ry += (ty - ry) * 0.06;
+        heroBg.style.transform = `scale(1.14) translate(${rx * -30}px, ${ry * -30}px)`;
+        heroInner.style.transform = `rotateY(${rx * 4}deg) rotateX(${ry * -4}deg)`;
+        requestAnimationFrame(render);
+      })();
+
+      // 3D tilt on the "why" cards
+      document.querySelectorAll('.why-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `rotateY(${px * 10}deg) rotateX(${py * -10}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.transform = 'rotateY(0) rotateX(0) translateY(0)'; });
+      });
+
+      // ── Pointer / touch FX (blue glow dot grid) ──
+      initPointerFX();
+    }
+
+    // Interactive DOT GRID: a field of pixels that reveal & scatter around the pointer.
+    function initPointerFX() {
+      const canvas = document.getElementById('fx');
+      const ctx = canvas.getContext('2d');
+      let dpr = 1, W = 0, H = 0;
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = innerWidth; H = innerHeight;
+        canvas.width = W * dpr; canvas.height = H * dpr;
+        canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      addEventListener('resize', resize);
+
+      const GAP = 26;          // spacing between dots
+      const RADIUS = 140;      // how far around the pointer dots light up
+      const tones = [[74,144,226], [111,170,245], [207,227,255]];  // brand blues → ice white
+
+      let mx = -9999, my = -9999;     // raw pointer
+      let px = mx, py = my;           // smoothed pointer
+      const move = (x, y) => { mx = x; my = y; };
+      addEventListener('mousemove', (e) => move(e.clientX, e.clientY));
+      addEventListener('mouseleave', () => move(-9999, -9999));
+      addEventListener('touchstart', (e) => { const t = e.touches[0]; if (t) move(t.clientX, t.clientY); }, { passive: true });
+      addEventListener('touchmove', (e) => { const t = e.touches[0]; if (t) move(t.clientX, t.clientY); }, { passive: true });
+      addEventListener('touchend', () => move(-9999, -9999));
+
+      let tick = 0;
+      (function frame() {
+        tick++;
+        ctx.clearRect(0, 0, W, H);
+
+        // smoothed follow (snap if pointer is "away")
+        if (mx < -1000) { px = mx; py = my; }
+        else { px += (mx - px) * 0.18; py += (my - py) * 0.18; }
+
+        if (px > -1000) {
+          const r2 = RADIUS * RADIUS;
+          const x0 = Math.max(0, Math.floor((px - RADIUS) / GAP) * GAP);
+          const y0 = Math.max(0, Math.floor((py - RADIUS) / GAP) * GAP);
+          const x1 = Math.min(W, px + RADIUS);
+          const y1 = Math.min(H, py + RADIUS);
+          for (let gx = x0; gx <= x1; gx += GAP) {
+            for (let gy = y0; gy <= y1; gy += GAP) {
+              const dx = gx - px, dy = gy - py;
+              const d2 = dx * dx + dy * dy;
+              if (d2 > r2) continue;
+              const d = Math.sqrt(d2);
+              const t = 1 - d / RADIUS;                 // 0 (edge) → 1 (center)
+              // gentle scatter outward from the pointer
+              const push = t * 9;
+              const inv = d > 0.001 ? push / d : 0;
+              const ox = gx + dx * inv;
+              const oy = gy + dy * inv;
+              const twinkle = 0.75 + 0.25 * Math.sin((gx + gy) * 0.05 + tick * 0.09);
+              const a = t * t * twinkle;                // ease-in + shimmer
+              const size = 1 + t * 2.4;
+              const [cr, cg, cb] = tones[(((gx + gy) / GAP) | 0) % tones.length];
+              ctx.beginPath();
+              ctx.fillStyle = `rgba(${cr},${cg},${cb},${a})`;
+              ctx.arc(ox, oy, size, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+        requestAnimationFrame(frame);
+      })();
+    }
+  </script>
+</body>
+</html>

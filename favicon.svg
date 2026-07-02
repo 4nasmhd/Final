@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ProLedge">
+  <rect width="64" height="64" rx="14" fill="#0a1124"/>
+  <!-- ascending chart bars: ProLedge motif -->
+  <rect x="15" y="34" width="8" height="15" rx="2" fill="#ffffff"/>
+  <rect x="28" y="26" width="8" height="23" rx="2" fill="#6faaf5"/>
+  <rect x="41" y="16" width="8" height="33" rx="2" fill="#4a90e2"/>
+  <!-- trend line -->
+  <path d="M15 32 L31 24 L45 13" fill="none" stroke="#cfe3ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
